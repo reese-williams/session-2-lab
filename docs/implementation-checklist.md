@@ -5,8 +5,8 @@ This checklist converts the functional, UI, testing, and coding guidelines into 
 ## 1) Data Contract (Backend + Frontend Shared)
 
 ### 1.1 Task model
-- [ ] Define a canonical `Task` shape used by API and UI.
-- [ ] Include fields:
+- [x] Define a canonical `Task` shape used by API and UI.
+- [x] Include fields:
   - `id` (number, unique)
   - `title` (string, required, non-empty after trim)
   - `description` (string, optional)
@@ -18,8 +18,8 @@ This checklist converts the functional, UI, testing, and coding guidelines into 
   - `updatedAt` (timestamp)
 
 ### 1.2 API response envelope
-- [ ] Keep response payloads consistent (`Task` object for create/update/fetch one, `Task[]` for list).
-- [ ] Keep error payloads consistent: `{ error: string, details?: object }`.
+- [x] Keep response payloads consistent (`Task` object for create/update/fetch one, `Task[]` for list).
+- [x] Keep error payloads consistent: `{ error: string, details?: object }`.
 
 ## 2) Backend Implementation
 
@@ -29,34 +29,34 @@ Target files:
 - `packages/backend/src/index.js`
 
 Tasks:
-- [ ] Replace in-memory DB with file-backed SQLite for restart persistence.
-- [ ] Add `tasks` table with all required columns.
-- [ ] Add migration/init SQL that is idempotent (`CREATE TABLE IF NOT EXISTS`).
-- [ ] Ensure server port follows `const PORT = process.env.PORT || 3030;`.
+- [x] Replace in-memory DB with file-backed SQLite for restart persistence.
+- [x] Add `tasks` table with all required columns.
+- [x] Add migration/init SQL that is idempotent (`CREATE TABLE IF NOT EXISTS`).
+- [x] Ensure server port follows `const PORT = process.env.PORT || 3030;`.
 
 ### 2.2 API endpoints
 Target files:
 - `packages/backend/src/app.js`
 
 Tasks:
-- [ ] `GET /api/todos`
+- [x] `GET /api/todos`
   - Query params:
     - `status=all|active|completed`
     - `dueState=all|overdue|today|upcoming|none`
     - `search=<text>` (title + description)
     - `sort=default|dueDate|priority|createdAt`
     - `order=asc|desc` (for non-default sort)
-- [ ] `POST /api/todos`
+- [x] `POST /api/todos`
   - Request: `{ title, description?, dueDate?, priority?, tags? }`
   - Validate title required.
-- [ ] `PATCH /api/todos/:id`
+- [x] `PATCH /api/todos/:id`
   - Allow updates for title/details and complete toggle.
   - Always bump `updatedAt`.
-- [ ] `DELETE /api/todos/:id`
-- [ ] `POST /api/todos/:id/duplicate`
-- [ ] `POST /api/todos/bulk/complete-visible`
+- [x] `DELETE /api/todos/:id`
+- [x] `POST /api/todos/:id/duplicate`
+- [x] `POST /api/todos/bulk/complete-visible`
   - Request should accept active filter context (status/dueState/search).
-- [ ] `DELETE /api/todos/completed`
+- [x] `DELETE /api/todos/completed`
 
 ### 2.3 Validation and business logic
 Target files (recommended to create):
@@ -65,13 +65,13 @@ Target files (recommended to create):
 - `packages/backend/src/utils/dueState.js`
 
 Tasks:
-- [ ] Validate title, dueDate, priority, tags.
-- [ ] Centralize due-state calculation (`overdue`, `today`, `upcoming`, `none`).
-- [ ] Implement default sort exactly:
+- [x] Validate title, dueDate, priority, tags.
+- [x] Centralize due-state calculation (`overdue`, `today`, `upcoming`, `none`).
+- [x] Implement default sort exactly:
   1. incomplete first
   2. earliest due date first (null dates last)
   3. newest created first
-- [ ] Implement manual sort overrides.
+- [x] Implement manual sort overrides.
 
 ## 3) Frontend Implementation
 
@@ -83,16 +83,16 @@ Target files:
 - `packages/frontend/src/index.js`
 
 Tasks:
-- [ ] Install and configure MUI dependencies.
-- [ ] Define theme palette per UI guidelines:
+- [x] Install and configure MUI dependencies.
+- [x] Define theme palette per UI guidelines:
   - primary `#2563EB`
   - secondary `#0F766E`
   - success `#16A34A`
   - warning `#D97706`
   - error `#DC2626`
   - neutral backgrounds/text as specified
-- [ ] Apply light-first theme and typography roles (`h4`, `h6`, `body1`, `body2`).
-- [ ] Use 8px spacing rhythm.
+- [x] Apply light-first theme and typography roles (`h4`, `h6`, `body1`, `body2`).
+- [x] Use 8px spacing rhythm.
 
 ### 3.2 Component decomposition
 Target files (recommended to create):
@@ -107,35 +107,35 @@ Target files (recommended to create):
 - `packages/frontend/src/api/tasksApi.js`
 
 Tasks:
-- [ ] Keep `App.js` orchestration-focused.
-- [ ] Move fetch logic into API module.
-- [ ] Keep form state and list/filter state predictable and testable.
+- [x] Keep `App.js` orchestration-focused.
+- [x] Move fetch logic into API module.
+- [x] Keep form state and list/filter state predictable and testable.
 
 ### 3.3 Feature slices (UI + API integration)
 Tasks:
-- [ ] Create task (required title validation)
-- [ ] View list
-- [ ] Edit task title/details
-- [ ] Toggle complete/active
-- [ ] Delete task
-- [ ] Set due date, priority, tags
-- [ ] Filter by status
-- [ ] Filter by due-state
-- [ ] Search title + description
-- [ ] Manual sort controls
-- [ ] Clear completed
-- [ ] Mark all visible completed
-- [ ] Duplicate task
-- [ ] Persist behavior verified across refresh and browser restart
+- [x] Create task (required title validation)
+- [x] View list
+- [x] Edit task title/details
+- [x] Toggle complete/active
+- [x] Delete task
+- [x] Set due date, priority, tags
+- [x] Filter by status
+- [x] Filter by due-state
+- [x] Search title + description
+- [x] Manual sort controls
+- [x] Clear completed
+- [x] Mark all visible completed
+- [x] Duplicate task
+- [x] Persist behavior verified across refresh and browser restart
 
 ### 3.4 Accessibility + feedback
 Tasks:
-- [ ] Keyboard-only completion of all core actions.
-- [ ] Visible focus indicators on all interactive controls.
-- [ ] Inline validation messaging for required fields.
-- [ ] Snackbar success/error messages after create/edit/delete.
-- [ ] Confirmation dialog for destructive bulk actions.
-- [ ] Completed tasks are visually distinct beyond color alone.
+- [x] Keyboard-only completion of all core actions.
+- [x] Visible focus indicators on all interactive controls.
+- [x] Inline validation messaging for required fields.
+- [x] Snackbar success/error messages after create/edit/delete.
+- [x] Confirmation dialog for destructive bulk actions.
+- [x] Completed tasks are visually distinct beyond color alone.
 
 ## 4) Testing Plan
 
@@ -145,9 +145,9 @@ Target files:
 - `packages/backend/__tests__/integration/todos-api.test.js` (new)
 
 Tasks:
-- [ ] Unit coverage for validation and due-state helpers.
-- [ ] Integration coverage for all TODO endpoints and key error cases.
-- [ ] Ensure test isolation and deterministic setup/teardown.
+- [x] Unit coverage for validation and due-state helpers.
+- [x] Integration coverage for all TODO endpoints and key error cases.
+- [x] Ensure test isolation and deterministic setup/teardown.
 
 ### 4.2 Frontend tests
 Target files:
@@ -157,10 +157,10 @@ Target files:
 - `packages/frontend/src/__tests__/FilterBar.test.js` (new)
 
 Tasks:
-- [ ] Update existing tests from "items" behavior to TODO behavior.
-- [ ] Add tests for create/edit/complete/delete.
-- [ ] Add tests for search/filter/sort.
-- [ ] Add tests for bulk actions and snackbar/dialog flows.
+- [x] Update existing tests from "items" behavior to TODO behavior.
+- [x] Add tests for create/edit/complete/delete.
+- [x] Add tests for search/filter/sort.
+- [x] Add tests for bulk actions and snackbar/dialog flows.
 
 ### 4.3 E2E tests (Playwright)
 Target files:
@@ -168,44 +168,44 @@ Target files:
 - `tests/e2e/pages/TodoPage.js` (new)
 
 Tasks:
-- [ ] Add 5-8 critical journey tests only.
-- [ ] Use one browser.
-- [ ] Use Page Object Model.
-- [ ] Ensure test independence and no order coupling.
+- [x] Add 5-8 critical journey tests only.
+- [x] Use one browser.
+- [x] Use Page Object Model.
+- [x] Ensure test independence and no order coupling.
 
 ## 5) Suggested Execution Order (Incremental)
 
 ### Milestone A: Core CRUD
-- [ ] Backend schema + CRUD endpoints
-- [ ] Frontend create/list/delete/complete
-- [ ] Basic backend + frontend tests for CRUD
+- [x] Backend schema + CRUD endpoints
+- [x] Frontend create/list/delete/complete
+- [x] Basic backend + frontend tests for CRUD
 
 ### Milestone B: Task metadata
-- [ ] Description, due date, priority, tags support
-- [ ] Validation and display improvements
-- [ ] Add/extend tests
+- [x] Description, due date, priority, tags support
+- [x] Validation and display improvements
+- [x] Add/extend tests
 
 ### Milestone C: Organize and search
-- [ ] Default sort and manual sort controls
-- [ ] Status + due-state filters
-- [ ] Search by title/description
-- [ ] Add/extend tests
+- [x] Default sort and manual sort controls
+- [x] Status + due-state filters
+- [x] Search by title/description
+- [x] Add/extend tests
 
 ### Milestone D: Productivity actions
-- [ ] Duplicate task
-- [ ] Clear completed
-- [ ] Mark visible tasks complete
-- [ ] Add/extend tests
+- [x] Duplicate task
+- [x] Clear completed
+- [x] Mark visible tasks complete
+- [x] Add/extend tests
 
 ### Milestone E: UX hardening + E2E
-- [ ] Accessibility pass (keyboard/focus/labels)
-- [ ] Snackbar/dialog feedback behavior
-- [ ] Responsive behavior checks
-- [ ] Add Playwright suite
+- [x] Accessibility pass (keyboard/focus/labels)
+- [x] Snackbar/dialog feedback behavior
+- [x] Responsive behavior checks
+- [x] Add Playwright suite
 
 ## 6) Definition of Done
-- [ ] Every requirement in `docs/functional-requirements.md` is implemented.
-- [ ] UI behavior and styling align to `docs/ui-guidelines.md`.
-- [ ] Tests follow `docs/testing-guidelines.md` and pass in CI/local.
-- [ ] Code organization and quality align to `docs/coding-guidelines.md`.
-- [ ] Root scripts run cleanly: `npm test`, `npm run test:integration`, `npm run test:e2e`, `npm run test:all`.
+- [x] Every requirement in `docs/functional-requirements.md` is implemented.
+- [x] UI behavior and styling align to `docs/ui-guidelines.md`.
+- [x] Tests follow `docs/testing-guidelines.md` and pass in CI/local.
+- [x] Code organization and quality align to `docs/coding-guidelines.md`.
+- [x] Root scripts run cleanly: `npm test`, `npm run test:integration`, `npm run test:e2e`, `npm run test:all`.
